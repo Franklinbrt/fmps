@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contagem para te ver 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ffe3ec, #fce4ec);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #880e4f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      min-height: 100vh;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 2rem;
+    }
+
+    #contador {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+
+    .mensagem {
+      font-size: 1.4rem;
+      margin: 1.5rem;
+      color: #5d1049;
+    }
+
+    .imagem {
+      max-width: 90%;
+      border-radius: 1rem;
+      margin-top: 1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      margin: 2rem 0;
+      font-size: 0.9rem;
+      color: #5e5e5e;
+    }
+
+    iframe {
+      margin-top: 2rem;
+      border-radius: 1rem;
+      width: 90%;
+      max-width: 560px;
+      height: 315px;
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Faltam...</h1>
+  <div id="contador">--</div>
+  <p>para o nosso reencontro! 💑</p>
+
+  <img class="imagem" src="romantico.png" alt="Casal apaixonado">
+
+  <div class="mensagem">
+    Cada segundo que passa, meu coração bate mais forte por você.  
+    <br><br>
+    Nosso momento está chegando! 🌅💕
+  </div>
+
+  <iframe 
+    src="https://www.youtube.com/embed/hdQWvWzeUMk?autoplay=1&loop=1&playlist=hdQWvWzeUMk"
+    title="Música Romântica"
+    frameborder="0"
+    allow="autoplay; encrypted-media"
+    allowfullscreen>
+  </iframe>
+
+  <footer>
+    Feito com amor por Franklin 💌
+  </footer>
+
+  <script>
+    const dataAlvo = new Date("2025-07-25T00:00:00");
+
+    function atualizarContador() {
+      const agora = new Date();
+      const tempoRestante = dataAlvo - agora;
+
+      if (tempoRestante <= 0) {
+        document.getElementById("contador").innerText = "É HOJE! 💖";
+        return;
+      }
+
+      const dias = Math.floor(tempoRestante / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((tempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((tempoRestante % (1000 * 60)) / 1000);
+
+      document.getElementById("contador").innerText =
+        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+    }
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+  </script>
+</body>
+</html>
+

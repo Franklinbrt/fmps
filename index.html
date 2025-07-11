@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contagem para te ver 💖</title>
+  <title>Nosso Amor 💖</title>
   <style>
     body {
       margin: 0;
@@ -14,18 +14,18 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: start;
+      justify-content: center;
       min-height: 100vh;
       text-align: center;
     }
 
     h1 {
-      font-size: 2.5rem;
+      font-size: 3.5rem;
       margin-top: 2rem;
     }
 
     #contador {
-      font-size: 2.5rem;
+      font-size: 5.0rem;
       font-weight: bold;
       margin: 10px 0;
     }
@@ -40,7 +40,7 @@
       max-width: 90%;
       border-radius: 1rem;
       margin-top: 1rem;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
     }
 
     footer {
@@ -49,64 +49,96 @@
       color: #5e5e5e;
     }
 
-    iframe {
+    #conteudo {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #botaoEntrar {
+      padding: 15px 30px;
+      font-size: 20px;
+      border: none;
+      background: hotpink;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
       margin-top: 2rem;
-      border-radius: 1rem;
-      width: 90%;
-      max-width: 560px;
-      height: 315px;
+    }
+
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1>💖 Faltam...</h1>
-  <div id="contador">--</div>
-  <p>para o nosso reencontro! 💑</p>
+  
+<div id="boasVindas" style="text-align: center;">
+  <h2 style="margin-top: 3rem; font-size: 2rem; color: #ad1457;">Bem vinda, amor! ♥</h2>
+  <button id="botaoEntrar">Preparada?</button>
+</div>
 
-  <img class="imagem" src="romantico.png" alt="Casal apaixonado">
+  <div id="conteudo">
+    <h1>💖 Faltam...</h1>
+    <div id="contador">--</div>
+    <h1>para o nosso reencontro! 💑</h1>
 
-  <div class="mensagem">
-    Cada segundo que passa, meu coração bate mais forte por você.  
-    <br><br>
-    Nosso momento está chegando! 🌅💕
+    <img class="imagem" src="fig.png" alt="Casal apaixonado">
+
+    <div class="mensagem">
+      A cada segundo que passa, meu coração bate mais forte por você.  
+      <br><br>
+      Nosso momento está chegando! 🌅💕
+    </div>
   </div>
 
-  <iframe 
-    src="https://www.youtube.com/embed/hdQWvWzeUMk?autoplay=1&loop=1&playlist=hdQWvWzeUMk"
-    title="Música Romântica"
-    frameborder="0"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
+  <!-- Música de fundo -->
+  <audio id="musica" autoplay loop>
+    <source src="theme.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio embutido.
+  </audio>
 
   <footer>
-    Feito com amor por Franklin 💌
+    Com amor, de Franklin para Stefanie 💌
   </footer>
 
   <script>
-    const dataAlvo = new Date("2025-07-25T00:00:00");
+    const botao = document.getElementById('botaoEntrar');
+    const conteudo = document.getElementById('conteudo');
+    const musica = document.getElementById('musica');
 
-    function atualizarContador() {
-      const agora = new Date();
-      const tempoRestante = dataAlvo - agora;
+    botao.addEventListener('click', () => {
+      document.getElementById('boasVindas').style.display = 'none';
+      conteudo.style.display = 'flex';
+      musica.play();
+      iniciarContagem();
+    });
+    function iniciarContagem() {
+      const dataAlvo = new Date("2025-07-25T00:00:00");
 
-      if (tempoRestante <= 0) {
-        document.getElementById("contador").innerText = "É HOJE! 💖";
-        return;
+      function atualizarContador() {
+        const agora = new Date();
+        const tempoRestante = dataAlvo - agora;
+
+        if (tempoRestante <= 0) {
+          document.getElementById("contador").innerText = "É HOJE! 💖";
+          return;
+        }
+
+        const dias = Math.floor(tempoRestante / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((tempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutos = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
+        const segundos = Math.floor((tempoRestante % (1000 * 60)) / 1000);
+
+        document.getElementById("contador").innerText =
+          `${dias}d ${horas}h ${minutos}m ${segundos}s`;
       }
 
-      const dias = Math.floor(tempoRestante / (1000 * 60 * 60 * 24));
-      const horas = Math.floor((tempoRestante % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutos = Math.floor((tempoRestante % (1000 * 60 * 60)) / (1000 * 60));
-      const segundos = Math.floor((tempoRestante % (1000 * 60)) / 1000);
-
-      document.getElementById("contador").innerText =
-        `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+      atualizarContador();
+      setInterval(atualizarContador, 1000);
     }
-
-    atualizarContador();
-    setInterval(atualizarContador, 1000);
   </script>
+
 </body>
 </html>
 
